@@ -31,6 +31,7 @@ var _camera_offset: Vector2
 
 func _get_property_list() -> Array:
 	var property_list: Array[Dictionary]
+	
 	property_list.append_array(Properties.add_priority_properties())
 
 	property_list.append({
@@ -104,10 +105,7 @@ func _get_property_list() -> Array:
 
 	property_list.append_array(Properties.add_secondary_properties())
 	
-	property_list.append({
-		"name": FRAME_PREVIEW,
-		"type": TYPE_BOOL,
-	})
+	property_list.append_array(Properties.add_limit_properties())
 
 	return property_list
 
@@ -148,6 +146,9 @@ func _set(property: StringName, value) -> bool:
 		follow_group_zoom_margin = value
 
 	Properties.set_follow_properties(property, value, self)
+
+	# Limit Properties
+	Properties.set_limit_properties(property, value, self)
 
 	if property == TILE_MAP_CLAMP_NODE_PROPERTY_NAME:
 		if value is TileMap:
@@ -203,6 +204,12 @@ func _get(property: StringName):
 
 	if property == Constants.FOLLOW_DAMPING_NAME: 						return Properties.follow_has_damping
 	if property == Constants.FOLLOW_DAMPING_VALUE_NAME: 				return Properties.follow_damping_value
+
+	if property == Constants.LIMIT_AREA_NAME:							return Properties.limit_has_limit
+	if property == Constants.LIMIT_LEFT_NAME:	 						return Properties.limit_left
+	if property == Constants.LIMIT_BOTTOM_NAME:	 						return Properties.limit_bottom
+	if property == Constants.LIMIT_RIGHT_NAME:	 						return Properties.limit_right
+	if property == Constants.LIMIT_TOP_NAME:	 						return Properties.limit_top
 
 	if property == TILE_MAP_CLAMP_NODE_PROPERTY_NAME:					return tile_map_clamp_node
 	if property == TILE_MAP_CLAMP_MARGIN_PROPERTY_NAME:					return tile_map_clamp_margin

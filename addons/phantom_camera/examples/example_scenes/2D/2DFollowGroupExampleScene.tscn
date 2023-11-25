@@ -627,7 +627,7 @@ visible = false
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(325, -222)
-zoom = Vector2(1.39286, 1.39286)
+zoom = Vector2(1.11735, 1.11735)
 
 [node name="PhantomCameraHost" type="Node" parent="Camera2D"]
 script = ExtResource("4_2efwt")
@@ -654,9 +654,9 @@ texture = ExtResource("5_0v2cd")
 unique_name_in_owner = true
 position = Vector2(325, -222)
 script = ExtResource("6_diuy4")
-priority_override = null
+priority_override = false
 priority = 6
-zoom = Vector2(1.39286, 1.39286)
+zoom = Vector2(1.11735, 1.11735)
 follow_mode = 3
 follow_group = Array[NodePath]([NodePath("../CharacterBody2D"), NodePath("../../GroupNPCSprite")])
 follow_parameters/auto_zoom = true
@@ -666,10 +666,11 @@ follow_parameters/zoom_margin = Vector4(100, 200, 200, 50)
 follow_parameters/target_offset = Vector2(0, 0)
 follow_parameters/damping = true
 follow_parameters/damping_value = 8.0
-follow_parameters/tile_map_clamp = false
+follow_parameters/tile_map_clamp_target = null
 tween_parameters = ExtResource("8_cx6vg")
 tween_on_load = false
 inactive_update_mode = 0
+frame_preview = true
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="Player"]
 position = Vector2(243, -28)
@@ -746,25 +747,27 @@ shape = SubResource("RectangleShape2D_18i13")
 unique_name_in_owner = true
 position = Vector2(0, -122)
 script = ExtResource("6_diuy4")
-priority_override = null
+priority_override = false
 priority = 0
 zoom = Vector2(2, 2)
 follow_mode = 0
 tween_parameters = ExtResource("10_ar2rk")
 tween_on_load = true
 inactive_update_mode = 0
+frame_preview = true
 
 [node name="InventoryPhantomCamera2D" type="Node2D" parent="Player/CharacterBody2D"]
 unique_name_in_owner = true
 position = Vector2(-183, -5)
 script = ExtResource("6_diuy4")
-priority_override = null
+priority_override = false
 priority = 0
 zoom = Vector2(2.5, 2.5)
 follow_mode = 0
 tween_parameters = ExtResource("11_5hu46")
 tween_on_load = true
 inactive_update_mode = 0
+frame_preview = true
 
 [node name="StaysInViewLabel" type="Label" parent="Player"]
 offset_left = 49.0

@@ -47,6 +47,13 @@ const TWEEN_RESOURCE_PROPERTY_NAME: StringName = "tween_parameters"
 const TWEEN_ONLOAD_NAME: StringName = "tween_on_load"
 const INACTIVE_UPDATE_MODE_PROPERTY_NAME: StringName = "inactive_update_mode"
 
+# Limits
+const LIMIT_AREA_NAME: StringName = "limit_area"
+const LIMIT_PARAMETERS_NAME: StringName = "limit_parameters/"
+const LIMIT_LEFT_NAME: StringName = LIMIT_PARAMETERS_NAME+"limit_left"
+const LIMIT_TOP_NAME: StringName = LIMIT_PARAMETERS_NAME+"limit_top"
+const LIMIT_RIGHT_NAME: StringName = LIMIT_PARAMETERS_NAME+"limit_right"
+const LIMIT_BOTTOM_NAME: StringName = LIMIT_PARAMETERS_NAME+"limit_bottom"
 
 enum FollowMode {
 	NONE 			= 0,

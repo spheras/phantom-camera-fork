@@ -21,6 +21,11 @@ var _active_pcam_has_damping: bool
 var _prev_active_pcam_2D_transform: Transform2D
 var _prev_active_pcam_3D_transform: Transform3D
 
+var _prev_camera2d_limit_left: int
+var _prev_camera2d_limit_right: int
+var _prev_camera2d_limit_top: int
+var _prev_camera2d_limit_bottom: int
+
 var trigger_pcam_tween: bool
 var tween_duration: float
 
@@ -108,10 +113,27 @@ func _check_camera_host_amount():
 	else:
 		multiple_pcam_hosts = false
 
+func _set_camera2d_limits(pcam: Node, no_previous_pcam: bool) ->void:
+	if no_previous_pcam:
+		_prev_camera2d_limit_left = camera_2D.limit_left
+		_prev_camera2d_limit_right = camera_2D.limit_right
+		_prev_camera2d_limit_top = camera_2D.limit_top
+		_prev_camera2d_limit_bottom = camera_2D.limit_bottom
+				
+	if pcam.Properties.limit_has_limit:
+		camera_2D.limit_left=pcam.Properties.limit_left
+		camera_2D.limit_right=pcam.Properties.limit_right
+		camera_2D.limit_top=pcam.Properties.limit_top
+		camera_2D.limit_bottom=pcam.Properties.limit_bottom
+	elif not no_previous_pcam:
+		camera_2D.limit_left=_prev_camera2d_limit_left
+		camera_2D.limit_right=_prev_camera2d_limit_right
+		camera_2D.limit_top=_prev_camera2d_limit_top
+		camera_2D.limit_bottom=_prev_camera2d_limit_bottom
 
 func _assign_new_active_pcam(pcam: Node) -> void:
 	var no_previous_pcam: bool
-
+		
 	if _active_pcam:
 		if _is_2D:
 			_prev_active_pcam_2D_transform = camera_2D.get_transform()
@@ -134,6 +156,7 @@ func _assign_new_active_pcam(pcam: Node) -> void:
 
 	if _is_2D:
 		camera_zoom = camera_2D.get_zoom()
+		_set_camera2d_limits(pcam, no_previous_pcam)
 	else:
 		if _active_pcam.get_camera_3D_resource():
 			camera_3D.set_cull_mask(_active_pcam.get_camera_cull_mask())
@@ -152,7 +175,6 @@ func _find_pcam_with_highest_priority() -> void:
 	for pcam in _pcam_list:
 		if pcam.get_priority() > _active_pcam_priority:
 			_assign_new_active_pcam(pcam)
-
 		_active_pcam_missing = false
 
 

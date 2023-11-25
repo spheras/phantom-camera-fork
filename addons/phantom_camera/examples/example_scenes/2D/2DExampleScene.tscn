@@ -638,7 +638,7 @@ script = ExtResource("1_eayfa")
 unique_name_in_owner = true
 position = Vector2(243, -148)
 script = ExtResource("2_mgsut")
-priority_override = null
+priority_override = false
 priority = 5
 zoom = Vector2(1.5, 1.5)
 follow_mode = 2
@@ -646,10 +646,11 @@ follow_target = NodePath("../CharacterBody2D")
 follow_parameters/target_offset = Vector2(0, -120)
 follow_parameters/damping = true
 follow_parameters/damping_value = 5.0
-follow_parameters/tile_map_clamp = false
+follow_parameters/tile_map_clamp_target = null
 tween_parameters = ExtResource("6_gqov5")
 tween_on_load = false
 inactive_update_mode = 0
+limit_area = false
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="Player"]
 position = Vector2(243, -28)
@@ -726,25 +727,27 @@ shape = SubResource("RectangleShape2D_18i13")
 unique_name_in_owner = true
 position = Vector2(0, -122)
 script = ExtResource("2_mgsut")
-priority_override = null
+priority_override = false
 priority = 0
 zoom = Vector2(2, 2)
 follow_mode = 0
 tween_parameters = ExtResource("10_0txyn")
 tween_on_load = true
 inactive_update_mode = 0
+limit_area = false
 
 [node name="InventoryPhantomCamera2D" type="Node2D" parent="Player/CharacterBody2D"]
 unique_name_in_owner = true
 position = Vector2(-183, -5)
 script = ExtResource("2_mgsut")
-priority_override = null
+priority_override = false
 priority = 0
 zoom = Vector2(2.5, 2.5)
 follow_mode = 0
 tween_parameters = ExtResource("11_xakux")
 tween_on_load = true
 inactive_update_mode = 0
+limit_area = false
 
 [node name="Label" type="Label" parent="Player"]
 offset_left = 167.0

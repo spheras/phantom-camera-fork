@@ -46,6 +46,13 @@ var follow_framed_initial_set: bool
 var show_viewfinder_in_play: bool
 var viewport_position: Vector2
 
+# Camera Limits
+var limit_has_limit: bool = false
+var limit_left: int = -10000000
+var limit_top: int = -10000000
+var limit_right: int = 10000000
+var limit_bottom: int = 10000000
+
 var zoom: Vector2 = Vector2.ONE
 
 var tween_resource: PhantomCameraTween
@@ -270,6 +277,43 @@ func add_secondary_properties() -> Array:
 
 	return _property_list
 
+func add_limit_properties() -> Array:
+	var _property_list: Array
+
+	_property_list.append({
+		"name": Constants.LIMIT_AREA_NAME,
+		"type": TYPE_BOOL,
+		"hint": PROPERTY_HINT_NONE,
+		"usage": PROPERTY_USAGE_DEFAULT,
+	})
+	
+	if(limit_has_limit):
+		_property_list.append({
+			"name": Constants.LIMIT_LEFT_NAME,
+			"type": TYPE_INT,
+			"hint": PROPERTY_HINT_NONE,
+			"usage": PROPERTY_USAGE_DEFAULT,
+		})
+		_property_list.append({
+			"name": Constants.LIMIT_TOP_NAME,
+			"type": TYPE_INT,
+			"hint": PROPERTY_HINT_NONE,
+			"usage": PROPERTY_USAGE_DEFAULT,
+		})
+		_property_list.append({
+			"name": Constants.LIMIT_RIGHT_NAME,
+			"type": TYPE_INT,
+			"hint": PROPERTY_HINT_NONE,
+			"usage": PROPERTY_USAGE_DEFAULT,
+		})
+		_property_list.append({
+			"name": Constants.LIMIT_BOTTOM_NAME,
+			"type": TYPE_INT,
+			"hint": PROPERTY_HINT_NONE,
+			"usage": PROPERTY_USAGE_DEFAULT,
+		})
+
+	return _property_list
 
 #########################
 # Set Properties
@@ -295,6 +339,18 @@ func set_priority_property(property: StringName, value, pcam: Node):
 	if property == Constants.PRIORITY_PROPERTY_NAME:
 		set_priority(value, pcam)
 
+func set_limit_properties(property: StringName, value, pcam: Node):
+	if property == Constants.LIMIT_AREA_NAME:
+		limit_has_limit = value
+		pcam.notify_property_list_changed()
+	elif property == Constants.LIMIT_BOTTOM_NAME:
+		limit_bottom = value
+	elif property == Constants.LIMIT_TOP_NAME:
+		limit_top = value
+	elif property == Constants.LIMIT_LEFT_NAME:
+		limit_left = value
+	elif property == Constants.LIMIT_RIGHT_NAME:
+		limit_right = value
 
 func set_follow_properties(property: StringName, value, pcam: Node):
 	if property == Constants.FOLLOW_MODE_PROPERTY_NAME:
